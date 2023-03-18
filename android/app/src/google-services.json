@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "394370264308",
+    "project_id": "porto-space-app",
+    "storage_bucket": "porto-space-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394370264308:android:b552e65611fed7483cc2a1",
+        "android_client_info": {
+          "package_name": "com.example.porto_space"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394370264308-n855mh8uqlpa5qujclhrimffhuf80p8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBG-rp2_-Qgyq0fNahPsSL-rPYb2gjZOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394370264308-n855mh8uqlpa5qujclhrimffhuf80p8s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "394370264308-1jr8jpo0hmoq8jb4fjfia2lad05nkvj4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.careerSpace"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

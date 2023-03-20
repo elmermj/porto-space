@@ -74,15 +74,15 @@ class ProfileController extends GetxController{
     
     if(isNew){
       textEditName.text = user.displayName!;
-      FirebaseFirestore.instance.collection("users").doc(user.uid).set(
-        {
-          "name": textEditName.text,
-          "email": user.email,
-          "dob": selectedDate!.value.toString().substring(0, 10), 
-          "city": textEditCity.text,
-          "occupation": textEditOccupation.text,
-          "currentCompany": textEditCurrentCompany.text
-        });
+      FirebaseFirestore.instance.collection("users").doc(user.uid).set({
+        "name": textEditName.text,
+        "email": user.email,
+        "dob": selectedDate!.value.toString().substring(0, 10), 
+        "city": textEditCity.text,
+        "occupation": textEditOccupation.text,
+        "currentCompany": textEditCurrentCompany.text
+      });
+
       name.value = textEditName.text;
       await user.updateDisplayName(textEditName.text);
       dob = selectedDate!.value.toString().substring(0, 10);
@@ -95,14 +95,14 @@ class ProfileController extends GetxController{
       update();
       Get.offAll(HomeScreen());
     }else{      
-      FirebaseFirestore.instance.collection("users").doc(user.uid).update(
-        {
-          "name": textEditName.text,
-          "dob": selectedDate!.value.toString().substring(0, 10), 
-          "city": textEditCity.text,
-          "occupation": textEditOccupation.text,
-          "currentCompany": textEditCurrentCompany.text
-        });
+      FirebaseFirestore.instance.collection("users").doc(user.uid).update({
+        "name": textEditName.text,
+        "dob": selectedDate!.value.toString().substring(0, 10), 
+        "city": textEditCity.text,
+        "occupation": textEditOccupation.text,
+        "currentCompany": textEditCurrentCompany.text
+      });
+      
       await user.updateDisplayName(textEditName.text);
 
       dob = selectedDate!.value.toString().substring(0, 10);

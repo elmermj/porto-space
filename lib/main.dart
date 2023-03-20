@@ -86,8 +86,7 @@ class PortoSpaceApp extends StatelessWidget {
         ),
       ),
       getPages: AppPages.routes,
-      home:
-      FutureBuilder(
+      home: FutureBuilder(
         future: Future.value(FirebaseAuth.instance.currentUser),
         builder: (context, snapshot) {
           if (snapshot.hasData) {

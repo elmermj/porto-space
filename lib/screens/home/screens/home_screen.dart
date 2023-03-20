@@ -8,6 +8,7 @@ import 'package:porto_space/screens/entrance/entrance_index.dart';
 import 'package:porto_space/screens/home/home_index.dart';
 import 'package:porto_space/screens/home/screens/home_conversation_list_screen.dart';
 import 'package:porto_space/screens/home/screens/home_search_result_screen.dart';
+import 'package:porto_space/screens/pings/pings_index.dart';
 import 'package:porto_space/screens/profile/profile_index.dart';
 import 'package:porto_space/screens/search/search_controller.dart';
 import 'package:porto_space/screens/search/search_screen.dart';
@@ -313,7 +314,7 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                   searchController.isSearchActive.value?
                   Row(children: [
                     Expanded(
-                      flex: 4,
+                      flex: 2,
                       child: Row(children: [
                         Components().searchBarTextButton(
                           buttonName: 'People',
@@ -321,13 +322,6 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                                   ? lightColorScheme.primary
                                   : lightColorScheme.secondary,
                           onPressed: (){searchController.setSelectedButton(SearchButton.people);},
-                        ),
-                        Components().searchBarTextButton(
-                          buttonName: 'Occupations',
-                          color: searchController.selectedButton.value == SearchButton.occupations
-                                  ? lightColorScheme.primary
-                                  : lightColorScheme.secondary,
-                          onPressed: (){searchController.setSelectedButton(SearchButton.occupations);},
                         ),
                         Components().searchBarTextButton(
                           buttonName: 'Interests',
@@ -340,12 +334,40 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Components().searchBarTextButton(
-                        buttonName: 'Search',
-                        color: searchController.searchTextController.text != ''
-                            ? lightColorScheme.primary
-                            : lightColorScheme.secondary,
-                        onPressed: (){}
+                      child: SizedBox(
+                        height: 24,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+                            backgroundColor: Colors.greenAccent
+                          ),
+                          onPressed: ()=>Get.to(
+                            ()=>PingsScreen(),
+                            transition: Transition.rightToLeft
+                          ), 
+                          child: Text(
+                            "Pings",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Constants.textM
+                            )
+                          )
+                        ),
+                      )
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Components().searchBarTextButton(
+                            buttonName: 'Search',
+                            color: searchController.searchTextController.text != ''
+                                ? lightColorScheme.primary
+                                : lightColorScheme.secondary,
+                            onPressed: (){}
+                          ),
+                        ],
                       ),
                     )
                   ],
@@ -413,7 +435,7 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
             ]),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
             floatingActionButton: Obx(()=>ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               child: SizedBox(
                 height: kBottomNavigationBarHeight-(kBottomNavigationBarHeight/10),
                 width: width*0.9,

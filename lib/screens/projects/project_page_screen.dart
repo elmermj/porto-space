@@ -7,6 +7,7 @@ import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/misc_index.dart';
 import 'package:porto_space/models/project_item.dart';
 import 'package:porto_space/screens/projects/projects_controller.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ProjectPageScreen extends GetView<ProjectsController>{
   final ProjectItem projectData;
@@ -25,6 +26,7 @@ class ProjectPageScreen extends GetView<ProjectsController>{
     var height = MediaQuery.of(context).size.height;
 
     qrCodeModal(){
+      String qrData = 'porto_space://projects/$projectId';
       showCupertinoDialog(
         barrierDismissible: true,
         context: context, 
@@ -38,7 +40,7 @@ class ProjectPageScreen extends GetView<ProjectsController>{
                   type: MaterialType.card,                 
                   child: Container(
                     padding: const EdgeInsets.all(4),
-                    width: MediaQuery.of(context).size.width-(kToolbarHeight/2),
+                    width: MediaQuery.of(context).size.width-(kToolbarHeight),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -49,6 +51,26 @@ class ProjectPageScreen extends GetView<ProjectsController>{
                         end: const FractionalOffset(0, 1.0),
                         stops: const [0.5, 1.0],
                         tileMode: TileMode.clamp),
+                    ),
+                    child: ListView(
+                      padding: Constants.standardInset,
+                      shrinkWrap: true,
+                      children: [
+                        const Text('QR CODE', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold),),
+                        Container(
+                          padding: Constants.standardInset,
+                          child: QrImage(
+                            data: qrData,
+                            dataModuleStyle: const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.circle, color: Colors.black),
+                            eyeStyle: const QrEyeStyle(eyeShape: QrEyeShape.circle, color: Colors.black),
+                            version: QrVersions.auto,
+                            size: width-(kToolbarHeight),
+                          ),
+                        ),
+                        MaterialButton(
+                          onPressed: (){}
+                        )
+                      ]
                     ),
                   )
                 )

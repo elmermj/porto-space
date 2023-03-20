@@ -290,11 +290,6 @@ class EntranceScreen extends GetView<EntranceController> {
                                 Expanded(
                                   flex: 1,
                                   child: Image(image: AssetImage("assets/icons/google_g_icon.png"))
-                                  // Image.asset("assets/icons/google_g_icon.png", fit: BoxFit.contain,)
-                                  // SvgPicture.asset(
-                                  //   'assets/icons/google_g_icon.svg',
-                                  //   fit: BoxFit.contain,
-                                  // )
                                 )
                               ],
                             )
@@ -404,19 +399,8 @@ class EntranceScreen extends GetView<EntranceController> {
           }
         );
       }
-    );  
+    );
   }
-
-  // void googleLogin(){
-  //   if (_loginFormKey.currentState!.validate()) {
-  //     _loginFormKey.currentState!.save();
-  //     FirebaseAuth.instance.signInWithCredential(
-  //       AuthCredential(providerId: providerId, signInMethod: signInMethod)
-  //     ) signInWithEmailAndPassword(
-  //       email: _email, password: _password
-  //     );
-  //   }
-  // }
 
   void login(){
     if (_loginFormKey.currentState!.validate()) {

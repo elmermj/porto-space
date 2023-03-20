@@ -52,7 +52,7 @@ class EntranceController extends GetxController {
       if (isNewUser) {
 
         await users.doc(user.uid).set({
-          'name': user.displayName!.split(' ').toList(),
+          'name': user.displayName!,
           'email': user.email,
           'createdAt': FieldValue.serverTimestamp(),
           'lastLoginAt': FieldValue.serverTimestamp(),

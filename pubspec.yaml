@@ -68,6 +68,7 @@ dependencies:
   flutter_polygon: ^0.3.0+2
   flutter_slidable: ^2.0.0
   hidden_drawer_menu: ^3.0.1
+  lucide_icons: ^0.125.0
 
   # Desktop UI
   hovering: ^1.0.4
@@ -101,6 +102,8 @@ flutter:
     - assets/animation/tristructure.riv
     - assets/animation/tristructure - white.riv
     - assets/animation/tristructure - loading.riv
+    - assets/animation/location_icon.riv
+    - assets/animation/pulse.riv
     - assets/json/cities - 2400.json
     - assets/google_fonts/
 

@@ -760,12 +760,7 @@ class HomeController extends GetxController{
         update();
     });
   }
-
-
-
-
-
-
+  
   void onPageChanged (int index){
     page.value = index;
     pageController.jumpToPage(index);

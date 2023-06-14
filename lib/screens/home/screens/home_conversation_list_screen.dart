@@ -1,29 +1,23 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/constants.dart';
-import 'package:porto_space/models/convopreview.dart';
 import 'package:porto_space/screens/home/home_controller.dart';
-import 'package:porto_space/screens/search/search_controller.dart';
-import 'package:rive/rive.dart'as rive;
+import 'package:porto_space/screens/search/search_controller.dart' as s;
 
-class ConversationListScreen extends GetView<HomeController> with PreferredSizeWidget {
+class ConversationListScreen extends GetView<HomeController> {
   ConversationListScreen({super.key});
   // final Stream<List<ConvoPreview>> convoList;
-  
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(20);
 
-  final SearchController searchController = Get.put(SearchController());
+
+  final s.SearchController searchController = Get.put(s.SearchController());
   final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    // print(homeController.convoList.length);
+    // debugPrint(homeController.convoList.length);
     return Container(
       height: double.infinity,
       decoration: BoxDecoration(
@@ -50,7 +44,7 @@ class ConversationListScreen extends GetView<HomeController> with PreferredSizeW
                   itemBuilder: (context, index) {
                     final item = homeController.convoList[index];
                     var indexMonth = item.timeStamp.month;
-                    String MMM = months[indexMonth-1];
+                    String mmm = months[indexMonth-1];
                     return GestureDetector(
                       onTap: () => homeController.openConversation(
                         othersName: item.othersName,
@@ -102,7 +96,7 @@ class ConversationListScreen extends GetView<HomeController> with PreferredSizeW
                                     ),
                                   ),
                                   (item.newMessage && item.senderId != homeController.user.uid)?
-                                  Text('New Message - '+item.lastMessage,
+                                  Text("New Message - ${item.lastMessage}",
                                     maxLines: 2,
                                     overflow: TextOverflow.fade,
                                     style: TextStyle(
@@ -132,7 +126,7 @@ class ConversationListScreen extends GetView<HomeController> with PreferredSizeW
                                     'Today'
                                     :item.timeStamp.day==DateTime.now().day-1?
                                     'Yesterday'
-                                    :"${item.timeStamp.day} $MMM ${item.timeStamp.year}",
+                                    :"${item.timeStamp.day} $mmm ${item.timeStamp.year}",
                                     style: TextStyle(
                                       fontSize: Constants.textM
                                     ),

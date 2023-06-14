@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:porto_space/models/project_item.dart';
 import 'package:porto_space/models/project_member.dart';
@@ -28,17 +29,17 @@ class ProjectsController extends GetxController {
   }
 
   fetchProjectMembers() async {
-    print(projectId);
+    debugPrint(projectId);
     projectMemberList.clear();
     var before = DateTime.now().millisecondsSinceEpoch;
-    print('FETCHING DATA . . . .');
+    debugPrint('FETCHING DATA . . . .');
     var memberListQuery = await firestore
                           .collection('projects')
                           .doc(projectId)
                           .collection('members')
                           .orderBy('memName', descending: false)
                           .get();
-    print("${memberListQuery.docs.asMap()}");
+    debugPrint("${memberListQuery.docs.asMap()}");
 
     for(var member in memberListQuery.docs){
       projectMemberList.add(
@@ -48,13 +49,13 @@ class ProjectsController extends GetxController {
           memberRole: member.data()['role']
         )
       );
-      print('${member.data()['memName']}');
+      debugPrint('${member.data()['memName']}');
       update();
     }
     update();
     var after = DateTime.now().millisecondsSinceEpoch;
     var delta = after-before;
-    print('DONE FETCHING . . . . ($delta ms)');
+    debugPrint('DONE FETCHING . . . . ($delta ms)');
   }
 
   qrInvite(){

@@ -4,14 +4,14 @@ import 'package:porto_space/misc/app_pages.dart';
 import 'package:porto_space/store/store.dart';
 
 class RouteWelcomeMiddleware extends GetMiddleware{
-  @override
   int? priority = 0;
 
+  @override
   RouteWelcomeMiddleware({required this.priority});
 
   @override
   RouteSettings? redirect(String? route){
-    print(ConfigStore.to.isFirstOpen);
+    debugPrint(ConfigStore.to.isFirstOpen.toString());
 
     if(ConfigStore.to.isFirstOpen==false){
       return null;

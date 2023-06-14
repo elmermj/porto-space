@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/components.dart';
 import 'package:porto_space/misc/constants.dart';
 import 'package:porto_space/models/supports.dart';
 import 'package:porto_space/screens/profile/profile_controller.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:rive/rive.dart';
 
 class ProfileEditScreen extends GetView<ProfileController> {
@@ -52,7 +52,7 @@ class ProfileEditScreen extends GetView<ProfileController> {
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 4),
               child: Text("${controller.user.email}", style: TextStyle(fontSize: Constants.textSL),),
             ),
-            Components().textFieldItem(
+            TextFieldItem(
               isDate: false,
               labelText: "Name: ",
               validator: controller.isLoading.value,
@@ -81,15 +81,15 @@ class ProfileEditScreen extends GetView<ProfileController> {
               ],
             ),
             Obx(()=>
-            controller.current.value?SizedBox():Column(
+            controller.current.value?const SizedBox():Column(
               children: [
-                Components().textFieldItem(
+                TextFieldItem(
                   isDate: false,
                   labelText: "Occupation: ",
                   validator: controller.isLoading.value,
                   controller: controller.textEditOccupation
                 ),
-                Components().textFieldItem(
+                TextFieldItem(
                   isDate: false,
                   labelText: "Company: ",
                   validator: controller.isLoading.value,
@@ -97,14 +97,14 @@ class ProfileEditScreen extends GetView<ProfileController> {
                 ),
               ],
             ),),
-            Obx(()=>Components().textFieldItem(
+            Obx(()=>TextFieldItem(
               isDate: true,
               labelText: "Birthdate: ",
               onTap: ()=> controller.selectDate(context),
               validator: controller.isLoading.value,
               textResult: "${controller.selectedDate?.value.toLocal().toString().split(' ')[0] ?? controller.dob}"
             )),
-            Components().textTypeAheadField<City>(
+            TextTypeAheadField<City>(
               labelText: "City:",
               controller: controller.textEditCity,
               validator: controller.isLoading.value,

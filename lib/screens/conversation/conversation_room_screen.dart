@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/misc_index.dart';
 import 'package:porto_space/models/message.dart';
@@ -57,7 +58,7 @@ class ConversationRoomScreen extends GetView<ConversationController> {
                     ),
                     Expanded(
                       flex: 6,
-                      child: Container(
+                      child: SizedBox(
                         // padding: const EdgeInsets.only(left: 16),
                         height: 40,
                         child: ListView.builder(
@@ -68,7 +69,7 @@ class ConversationRoomScreen extends GetView<ConversationController> {
                           itemBuilder:(context, index) {
                             var name = controller.convoCreds[index].senderName;
                             var len = controller.convoCreds.length;
-                            print("ITEM BUILDER: "+name!);
+                            debugPrint("ITEM BUILDER: ${name!}");
                             return Center(
                               child: Text(index!=len-1?"$name, ":name,
                                 style: TextStyle(
@@ -120,14 +121,14 @@ class ConversationRoomScreen extends GetView<ConversationController> {
           ),
           child: Obx(()=> 
             controller.isLoading.value?
-            Center(
+            const Center(
               child: SizedBox(
                 width: double.infinity,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text('Loading Data. Please wait'),
                     SizedBox(
                       height: 90,
@@ -149,9 +150,9 @@ class ConversationRoomScreen extends GetView<ConversationController> {
                   return Text('Error: ${snapshot.error}');
                 }
                 if (!snapshot.hasData) {
-                  return Column(
+                  return const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text('Loading...'),
                       SizedBox(
                         height: 60,
@@ -384,7 +385,7 @@ class ConversationRoomScreen extends GetView<ConversationController> {
                           separatorBuilder: (context, index) => const SizedBox(height: 16,),
                           itemCount: controller.convoCreds.length,
                           itemBuilder: (context, index){
-                            return Components().profileIcon50(
+                            return ProfileIcon50(
                               condition: controller.convoCreds[index].senderId!=controller.user.uid,
                               name: controller.convoCreds[index].senderName
                             );

@@ -117,7 +117,7 @@ class ProfileController extends GetxController{
     }
 
     if (kDebugMode) {
-      print("name: $name dob: $dob city: ${city.value}");
+      debugPrint("name: $name dob: $dob city: ${city.value}");
     }
   }
 
@@ -149,7 +149,7 @@ class ProfileController extends GetxController{
       selectedDate!.value = DateTime.parse(dob!);
     }
 
-    print("name: $name dob: $dob city: ${city.value}");
+    debugPrint("name: $name dob: $dob city: ${city.value}");
     isLoading.value = false;
     
     update();
@@ -163,9 +163,9 @@ class ProfileController extends GetxController{
                             .collection("users").doc(user.uid)
                             .collection("educationHistory").get();
       final batch = FirebaseFirestore.instance.batch();
-      userEduHistory.docs.forEach((doc) {
+      for (var doc in userEduHistory.docs) {
         batch.delete(doc.reference);
-      });
+      }
       await batch.commit();
       await userProfile.delete();
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -189,7 +189,7 @@ class ProfileController extends GetxController{
     } catch (e) {
 
       if (kDebugMode) {
-        print(e.toString());
+        debugPrint(e.toString());
       }
 
       return null;

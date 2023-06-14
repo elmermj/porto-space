@@ -16,7 +16,7 @@ import 'package:rive/rive.dart';
 enum ProjectStages{initial, inProgress, onPause, completed, cancelled}
 
 extension ProjectStageNames on ProjectStages {
-  String get name => this.toString().split('.').last;
+  String get name => toString().split('.').last;
 }
 
 class HomeController extends GetxController{
@@ -113,7 +113,7 @@ class HomeController extends GetxController{
       isLoading.value=false;
       update();
     } catch (e) {
-      print('Error saving data: $e');
+      debugPrint('Error saving data: $e');
     }
   }
 
@@ -130,10 +130,10 @@ class HomeController extends GetxController{
     currentCompany = data['currentCompany'];
 
     if(data['projectList']!=null) projectList.value = data['projectList'];
-    print(projectList);
+    debugPrint(projectList.toString());
 
     if(data['interest']!=null) interests.value = data['interest'];
-    print(interests);
+    debugPrint(interests.toString());
     
 
     if(profileDesc==null||data['profileDesc']==null){
@@ -154,12 +154,10 @@ class HomeController extends GetxController{
 
     if(!partial){
       education = await fetchEduHistory();
-    };
-
-    if (kDebugMode) {
-      print("name: $name. dob: $dob. city: $city. occupation: $occupation. currentCompany: $currentCompany ");
-      print(education);
     }
+
+    debugPrint("name: $name. dob: $dob. city: $city. occupation: $occupation. currentCompany: $currentCompany ");
+    debugPrint(education.toString());
     textEditProfileDesc.text = profileDesc!;
     update();
   }
@@ -174,8 +172,8 @@ class HomeController extends GetxController{
     update();
     textEditInterest.clear();
     FocusScope.of(Get.context!).unfocus();
-    print("Added interest : $interests");
-    print("Added New : $newInterests");
+    debugPrint("Added interest : $interests");
+    debugPrint("Added New : $newInterests");
   }
 
   removeInterest({
@@ -191,14 +189,14 @@ class HomeController extends GetxController{
     var interestsColl = firestore.collection('interest');
     var count=0;
 
-    if(user==null)print("NOT AUTH");
+    if(user.uid.isEmpty) debugPrint("NOT AUTH");
 
     if(interests.length==newInterests.length){
       for(int i=0;i<interests.length;i++){
         if(interests[i]!=newInterests[i])count++;
       }
       if (kDebugMode) {
-        print("Difference count ::: $count");
+        debugPrint("Difference count ::: $count");
       }
     }
 
@@ -208,11 +206,11 @@ class HomeController extends GetxController{
         'interest': newInterests
       });
       // for(var interest in newInterests){
-      //   print("INTEREST : $interest");
+      //   debugPrint("INTEREST : $interest");
       //   batch.set(interestsColl.doc(interest).collection('mem').doc(user.uid), {
       //     'ct':Timestamp.now()
       //   });
-      //   print(batch.toString());
+      //   debugPrint(batch.toString());
       // }
       await batch.commit();
     }
@@ -241,9 +239,7 @@ class HomeController extends GetxController{
       update();
 
     }on Exception{
-      if (kDebugMode) {
-        print(Exception());
-      }
+      Exception();
     }
   }
 
@@ -263,7 +259,7 @@ class HomeController extends GetxController{
       update();
     } catch (e) {
       if (kDebugMode) {
-        print(e);
+        debugPrint(e.toString());
       }
     }
     return education;
@@ -272,7 +268,7 @@ class HomeController extends GetxController{
   
   updateEduHistoryItem(int hashCode) async {
     try {
-      print(hashCode);
+      debugPrint(hashCode.toString());
       var newQuery = {
         "eduLevel":eduLevel,
         "eduInstitute":eduInstitute,
@@ -291,8 +287,8 @@ class HomeController extends GetxController{
       for (var element in querySnapshot.docs) {
         batch.update(element.reference, newQuery);
         if (kDebugMode) {
-          print('querySnapshot: ${querySnapshot.toString()}');
-          print('${element.reference} $newQuery');
+          debugPrint('querySnapshot: ${querySnapshot.toString()}');
+          debugPrint('${element.reference} $newQuery');
         }
       }
       await batch.commit();
@@ -301,7 +297,7 @@ class HomeController extends GetxController{
 
     } catch (e) {
       if (kDebugMode) {
-        print(e);
+        debugPrint(e.toString());
       }
     }
   }
@@ -323,7 +319,7 @@ class HomeController extends GetxController{
       update();
     } catch (e) {
       if (kDebugMode) {
-        print(e);
+        debugPrint(e.toString());
       }
     }
   }
@@ -356,7 +352,7 @@ class HomeController extends GetxController{
   toggleAuthor({required bool isAuthor}){
     isAuthor? projectRole = 'Author':projectRole = 'Contributor';
     update();
-    print(projectRole);
+    debugPrint(projectRole);
     update();
   }
 
@@ -396,31 +392,31 @@ class HomeController extends GetxController{
         projectStatus = 'Initial';
         color.value = const Color.fromARGB(255, 88, 233, 255);
         update();
-        print(projectStatus);
+        debugPrint(projectStatus);
         break;
       case ProjectStages.inProgress:
         projectStatus = 'In Progress';
         color.value = const Color.fromARGB(255, 88, 191, 255);
         update();
-        print(projectStatus);
+        debugPrint(projectStatus);
         break;
       case ProjectStages.onPause:
         projectStatus = 'On Pause';
-        color.value = Color.fromARGB(255, 232, 216, 39);
+        color.value = const Color.fromARGB(255, 232, 216, 39);
         update();
-        print(projectStatus);
+        debugPrint(projectStatus);
         break;
       case ProjectStages.completed:
         projectStatus = 'Completed';
         color.value = const Color.fromARGB(255, 102, 255, 88);
         update();
-        print(projectStatus);
+        debugPrint(projectStatus);
         break;
       case ProjectStages.cancelled:
         projectStatus = 'Cancelled';
         color.value = const Color.fromARGB(255, 255, 88, 88);
         update();
-        print(projectStatus);
+        debugPrint(projectStatus);
         break;
     }
   }
@@ -469,7 +465,7 @@ class HomeController extends GetxController{
       await fetchProjectList();
       Get.back();
     }catch (e){
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -477,7 +473,7 @@ class HomeController extends GetxController{
 
     projectListItems.clear();
     final batch = firestore.batch();
-    print("PROJECT LIST ::: $projectList");
+    debugPrint("PROJECT LIST ::: $projectList");
     try {
       var projectRefs = projectList
                             .map((projectId) => 
@@ -524,7 +520,7 @@ class HomeController extends GetxController{
 
       if (kDebugMode) {
 
-        print(e);
+        debugPrint(e.toString());
 
       }
 
@@ -552,7 +548,7 @@ class HomeController extends GetxController{
   
   // updateEduHistoryItem(int hashCode) async {
   //   try {
-  //     print(hashCode);
+  //     debugPrint(hashCode);
   //     var newQuery = {
   //       "eduLevel":eduLevel,
   //       "eduInstitute":eduInstitute,
@@ -571,8 +567,8 @@ class HomeController extends GetxController{
   //     for (var element in querySnapshot.docs) {
   //       batch.update(element.reference, newQuery);
   //       if (kDebugMode) {
-  //         print('querySnapshot: ${querySnapshot.toString()}');
-  //         print('${element.reference} $newQuery');
+  //         debugPrint('querySnapshot: ${querySnapshot.toString()}');
+  //         debugPrint('${element.reference} $newQuery');
   //       }
   //     }
   //     await batch.commit();
@@ -581,7 +577,7 @@ class HomeController extends GetxController{
 
   //   } catch (e) {
   //     if (kDebugMode) {
-  //       print(e);
+  //       debugPrint(e);
   //     }
   //   }
   // }
@@ -603,7 +599,7 @@ class HomeController extends GetxController{
   //     update();
   //   } catch (e) {
   //     if (kDebugMode) {
-  //       print(e);
+  //       debugPrint(e);
   //     }
   //   // }
   // }
@@ -646,7 +642,7 @@ class HomeController extends GetxController{
 
         futures.add(convoRef.snapshots().first.then((convoSnapshot) async {
           if (!convoSnapshot.exists || !convoSnapshot.data()!.containsKey('val')) {
-            return Future.value(null);
+            return Future.value();
           }
 
           final val = convoSnapshot.data()!['val'];
@@ -740,10 +736,10 @@ class HomeController extends GetxController{
       
       await lastMesRef.update({'nm': false});
       Get.back();
-      // debugPrint("BATCH COMMITTED");
+      // debugdebugPrint("BATCH COMMITTED");
     }
 
-    // debugPrint('CHAT ROOM EXISTS');
+    // debugdebugPrint('CHAT ROOM EXISTS');
     Get.to(() =>
         ConversationRoomScreen(
             otherName: othersName,
@@ -800,7 +796,7 @@ class HomeController extends GetxController{
     await loadProfile(partial: false);
     fetchProjectList();
     isLoading.value=false;
-    print("INTERESTS :::: "+interests.toString());
+    debugPrint("INTERESTS :::: $interests");
     update();
   }
 

@@ -8,6 +8,9 @@ import 'package:porto_space/screens/conversation/conversation_room_screen.dart';
 enum SearchButton {people, occupations, interests }
 
 class SearchController extends GetxController {
+
+  SearchController();
+
   final TextEditingController searchTextController = TextEditingController();
   User user = FirebaseAuth.instance.currentUser!;
   final RxBool isSearchActive = false.obs;
@@ -35,15 +38,15 @@ class SearchController extends GetxController {
 
           final result = await query
               .where('name', isGreaterThanOrEqualTo: keyword)
-              .where('name', isLessThan: keyword + 'z')
+              .where('name', isLessThan: '${keyword}z')
               .limit(5)
               .get();
           searchResults.assignAll(result.docs);
 
           if(kDebugMode){
-            print(result.toString());
+            debugPrint(result.toString());
             if(result.docs.isEmpty){
-              print(searchWarning.value);
+              debugPrint(searchWarning.value);
             }
           }
           
@@ -53,19 +56,19 @@ class SearchController extends GetxController {
         case SearchButton.occupations:
           final result = await query
               .where('occupation', isGreaterThanOrEqualTo: keyword)
-              .where('occupation', isLessThan: keyword + 'z')
+              .where('occupation', isLessThan: '${keyword}z')
               .limit(5)
               .get();
           searchResults.assignAll(result.docs);
           if(result.docs.isEmpty){
             searchWarning.value=keyword;
-            print(searchWarning.value);
+            debugPrint(searchWarning.value);
           }
           break;
 
 
         case SearchButton.interests:
-          print("switched to interest search");
+          debugPrint("switched to interest search");
           var converted = keyword
               .replaceAll(RegExp(' +'), ' ')
               .split(' ')
@@ -82,7 +85,7 @@ class SearchController extends GetxController {
 
           if(result.docs.isEmpty){
             searchWarning.value=converted;
-            print(searchWarning.value);
+            debugPrint(searchWarning.value);
           }
 
           break;
@@ -138,7 +141,7 @@ class SearchController extends GetxController {
         .get();
 
       final List<String> listDocIds2 = query2.docs.map((doc) => doc.id).toList();
-      print(listDocIds2.toString());
+      debugPrint(listDocIds2.toString());
       final chatRoomId = listDocIds2.first;
 
       await FirebaseFirestore.instance.collection('users').doc(user.uid)
@@ -165,7 +168,7 @@ class SearchController extends GetxController {
     else{
 
       final chatRoomId = listDocIds.first;
-      print('CHAT ROOM EXISTS');
+      debugPrint('CHAT ROOM EXISTS');
 
       Get.to(()=>
         ConversationRoomScreen(
@@ -177,8 +180,8 @@ class SearchController extends GetxController {
       
       update();
 
-      print('User ID: $userId');
-      print('Other ID: $othersId');
+      debugPrint('User ID: $userId');
+      debugPrint('Other ID: $othersId');
 
     }
   }

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/components.dart';
 import 'package:porto_space/misc/constants.dart';
@@ -19,6 +20,8 @@ class AboutMeSubScreen extends GetView<HomeController>{
 
 @override
   final HomeController controller = Get.put(HomeController());
+
+  AboutMeSubScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +148,8 @@ class AboutMeSubScreen extends GetView<HomeController>{
                       SlidableAction(
                         onPressed: (context){
                           if (kDebugMode) {
-                            print('Delete!');
-                            print(controller.education[index]['hashCode']);
+                            debugPrint('Delete!');
+                            debugPrint(controller.education[index]['hashCode']);
                           }
                           controller.deleteEduHistoryItem(controller.education[index]['hashCode']);
                         },
@@ -162,7 +165,7 @@ class AboutMeSubScreen extends GetView<HomeController>{
                       SlidableAction(
                         onPressed: (context){
                           if (kDebugMode) {
-                            print('Edit!'); 
+                            debugPrint('Edit!'); 
                           }
                           showEduDialog(context, 
                             title: 'Edit',
@@ -206,13 +209,13 @@ class AboutMeSubScreen extends GetView<HomeController>{
                               ),)
                             ],
                             onPressed: () {
-                              print('PRESSED EDIT');
+                              debugPrint('PRESSED EDIT');
                               if(addEducationkey.currentState!.validate()){
                                 addEducationkey.currentState!.save();
-                                print('EDIT STATE SAVED');
+                                debugPrint('EDIT STATE SAVED');
       
                                 controller.updateEduHistoryItem(controller.education[index]['hashCode']);
-                                print('UPDATE METHOD CALLED');
+                                debugPrint('UPDATE METHOD CALLED');
                                 
                                 Navigator.pop(addEducationkey.currentContext!);
                               }
@@ -318,8 +321,8 @@ class AboutMeSubScreen extends GetView<HomeController>{
   showInterestDialog(
     BuildContext context,
   ){
-    print("interest : ${controller.interests}");
-    print("New : ${controller.newInterests}");
+    debugPrint("interest : ${controller.interests}");
+    debugPrint("New : ${controller.newInterests}");
     controller.newInterests= RxList.from(controller.interests);
     showCupertinoDialog(
       barrierDismissible: true,
@@ -333,7 +336,7 @@ class AboutMeSubScreen extends GetView<HomeController>{
                 child: Material( 
                   type: MaterialType.card,                 
                   child: Container(
-                    padding: EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(4),
                     width: MediaQuery.of(context).size.width-(kToolbarHeight/2),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -353,7 +356,7 @@ class AboutMeSubScreen extends GetView<HomeController>{
                         Components().cEduDialogTitle(title: 'Edit Interests'),
                         Container(
                           padding: Constants.standardInset,
-                          child: Text('Your Interests:'),
+                          child: const Text('Your Interests:'),
                         ),
                         Obx(()=>controller.newInterests.isEmpty?
                         Container(
@@ -463,23 +466,23 @@ class AboutMeSubScreen extends GetView<HomeController>{
     String? title,
     Key? key,
     HomeController? controller,
-    dynamic? eduLevelInitValue,
+    dynamic eduLevelInitValue,
     Function(String?)? eduLevelOnSaved,
     String? Function(String?)? eduLevelValidator,
 
-    dynamic? eduInstituteInitValue,
+    dynamic eduInstituteInitValue,
     Function(String?)? eduInstituteOnSaved,
     String? Function(String?)? eduInstituteValidator,
 
-    dynamic? fieldOfStudyInitValue,
+    dynamic fieldOfStudyInitValue,
     Function(String?)? fieldOfStudyOnSaved,
     String? Function(String?)? fieldOfStudyValidator,
 
-    dynamic? eduYearStartInitValue,
+    dynamic eduYearStartInitValue,
     Function(String?)? eduYearStartOnSaved,
     String? Function(String?)? eduYearStartValidator,
 
-    dynamic? eduYearEndInitValue,
+    dynamic eduYearEndInitValue,
     Function(String?)? eduYearEndOnSaved,
     String? Function(String?)? eduYearEndValidator,
 
@@ -500,7 +503,7 @@ class AboutMeSubScreen extends GetView<HomeController>{
                 child: Material( 
                   type: MaterialType.card,                 
                   child: Container(
-                    padding: EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(4),
                     width: MediaQuery.of(context).size.width-(kToolbarHeight/2),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -520,25 +523,25 @@ class AboutMeSubScreen extends GetView<HomeController>{
                         shrinkWrap: true,
                         children: [
                           Components().cEduDialogTitle(title: 'Education Details'),
-                          Components().cTextFormField1(
+                          CTextFormField1(
                             hintText: 'Ex: Bachelor of Arts, Bachelor of Science, etc',
                             labelText: 'Degree',
                             initialValue: eduLevelInitValue,
                             onSaved: eduLevelOnSaved
                           ),
-                          Components().cTextFormField1(
+                          CTextFormField1(
                             hintText: 'Ex: University College London, etc',
                             labelText: 'Institute',
                             initialValue: eduInstituteInitValue,
                             onSaved: eduInstituteOnSaved
                           ),
-                          Components().cTextFormField1(
+                          CTextFormField1(
                             hintText: 'Ex: Computer Science, Engineering, etc',
                             labelText: 'Field of Study',
                             initialValue: fieldOfStudyInitValue,
                             onSaved: fieldOfStudyOnSaved
                           ),
-                          Components().cTextFormField1(
+                          CTextFormField1(
                             hintText: 'Ex: 2011 (Numerical Only)',
                             labelText: 'Year Start',
                             keyboardType: TextInputType.number,
@@ -556,7 +559,7 @@ class AboutMeSubScreen extends GetView<HomeController>{
                           Obx(() =>
                             controller!.ongoing.value?
                             const SizedBox():
-                            Components().cTextFormField1(
+                            CTextFormField1(
                               hintText: 'Ex: 2015 (Numerical Only)',
                               labelText: 'Year End',
                               keyboardType: TextInputType.number,

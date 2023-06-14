@@ -34,11 +34,11 @@ class WelcomeScreen extends GetView<WelcomeController> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Align(
+            const Align(
               alignment: Alignment.topCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [                  
+                children: [                  
                   SizedBox(
                     height: 60,
                     width: 60,

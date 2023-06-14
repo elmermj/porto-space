@@ -1,32 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
-import 'package:porto_space/misc/constants.dart';
 import 'package:porto_space/misc/misc_index.dart';
 import 'package:porto_space/screens/entrance/entrance_index.dart';
 import 'package:porto_space/screens/home/home_index.dart';
-import 'package:porto_space/screens/home/screens/home_conversation_list_screen.dart';
-import 'package:porto_space/screens/home/screens/home_search_result_screen.dart';
 import 'package:porto_space/screens/pings/pings_index.dart';
 import 'package:porto_space/screens/profile/profile_index.dart';
-import 'package:porto_space/screens/search/search_controller.dart';
+import 'package:porto_space/screens/search/search_controller.dart' as s;
 import 'package:porto_space/screens/search/search_screen.dart';
 import 'package:rive/rive.dart' as rive;
 
-class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
+class HomeScreen extends GetView<HomeController>{
   final addEducationkey = GlobalKey<FormState>();
   final editEducationkey = GlobalKey<FormState>();
 
   @override
   final HomeController controller = Get.put(HomeController());
-  final SearchController searchController = Get.put(SearchController());
+  final s.SearchController searchController = Get.put(s.SearchController());
 
   HomeScreen({super.key});
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(10);
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +43,11 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
               stops: const [0.5, 1.0],
               tileMode: TileMode.clamp),
           ),
-          child: Column(
+          child: const Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               Text('Loading Data. Please wait'),
               SizedBox(
                 height: 90,
@@ -150,7 +144,7 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                       ],
                     ),
                   ),
-                  Components().cTabBar(
+                  CTabBar(
                     tabs: [
                       Components().cTab(text: 'My Journey',),
                       Components().cTab(text: 'About Me',),
@@ -197,13 +191,13 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
     }
 
     Widget hiddenDrawer(){
-      return Components().hiddenDrawer(
+      return HiddenDrawer(
         width: 0.2*width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Components().drawerItem(
+            DrawerItem(
               text: 'Edit Profile',
               icon:  Icons.settings,
               onTap: ()=>Get.to(()=>ProfileEditScreen(isNew: false,),
@@ -212,7 +206,7 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                 controller.loadProfile(partial: true)
               ),
             ),
-            Components().drawerItem(
+            DrawerItem(
               text: 'Log Out',
               icon: Icons.logout_rounded,
               onTap: (){
@@ -273,9 +267,9 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                   ):
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         SizedBox(
                           height: 24,
                           width: 24,
@@ -304,31 +298,31 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                 onPressed: () {
                   searchController.searchTextController.clear();
                   searchController.isSearchActive.toggle();
-                  searchController.selectedButton.value == SearchButton.people;
+                  searchController.selectedButton.value == s.SearchButton.people;
                   controller.update();
                 },
               ),],
               bottom: PreferredSize(
-                preferredSize: preferredSize,
+                preferredSize: const Size.fromHeight(10),
                 child: Obx(()=>
                   searchController.isSearchActive.value?
                   Row(children: [
                     Expanded(
                       flex: 2,
                       child: Row(children: [
-                        Components().searchBarTextButton(
+                        SearchBarTextButton(
                           buttonName: 'People',
-                          color: searchController.selectedButton.value == SearchButton.people
+                          color: searchController.selectedButton.value == s.SearchButton.people
                                   ? lightColorScheme.primary
                                   : lightColorScheme.secondary,
-                          onPressed: (){searchController.setSelectedButton(SearchButton.people);},
+                          onPressed: (){searchController.setSelectedButton(s.SearchButton.people);},
                         ),
-                        Components().searchBarTextButton(
+                        SearchBarTextButton(
                           buttonName: 'Interests',
-                          color: searchController.selectedButton.value == SearchButton.interests
+                          color: searchController.selectedButton.value == s.SearchButton.interests
                                   ? lightColorScheme.primary
                                   : lightColorScheme.secondary,
-                          onPressed: (){searchController.setSelectedButton(SearchButton.interests);},
+                          onPressed: (){searchController.setSelectedButton(s.SearchButton.interests);},
                         ),
                       ],),
                     ),
@@ -360,7 +354,7 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Components().searchBarTextButton(
+                          SearchBarTextButton(
                             buttonName: 'Search',
                             color: searchController.searchTextController.text != ''
                                 ? lightColorScheme.primary
@@ -475,8 +469,8 @@ class HomeScreen extends GetView<HomeController> with PreferredSizeWidget {
           itemBuilder: (context, index) => 
             index==2? GestureDetector(
               onTap: () => Get.to(const HomeSearchResultScreen()),
-              child: Row(
-                children: const  [
+              child: const Row(
+                children: [
                   Text('See more results'),
                   Icon(Icons.arrow_right)
                 ],

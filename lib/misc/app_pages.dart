@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:porto_space/middleware/route_welcome.dart';
-import '../screens/projects/projects_index.dart' as project;
 import '../screens/welcome/welcome_index.dart' as welcome;
 import '../screens/entrance/entrance_index.dart' as entrance;
 import '../screens/profile/profile_index.dart' as profile;

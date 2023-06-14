@@ -1,26 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/components.dart';
 import 'package:porto_space/misc/constants.dart';
 import 'package:porto_space/screens/entrance/entrance_screen.dart';
 import 'package:porto_space/screens/profile/profile_edit_screen.dart';
-import 'package:porto_space/screens/search/search_controller.dart';
+import 'package:porto_space/screens/search/search_controller.dart' as s;
 import 'package:rive/rive.dart';
 
-class SearchScreen extends GetView<SearchController> with PreferredSizeWidget{
-  SearchScreen({super.key});
+class SearchScreen extends GetView<s.SearchController>{
   
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(20);
+  final s.SearchController searchController = Get.put(s.SearchController());
 
-  
-  final SearchController searchController = Get.put(SearchController());
+  SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +30,12 @@ class SearchScreen extends GetView<SearchController> with PreferredSizeWidget{
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Components().drawerItem(
+              DrawerItem(
                 text: 'Edit Profile',
                 icon:  Icons.settings,
                 onTap: ()=>Get.to(()=>ProfileEditScreen(isNew: false,))
               ),
-              Components().drawerItem(
+              DrawerItem(
                 text: 'Log Out',
                 icon: Icons.logout_rounded,
                 onTap: (){
@@ -72,9 +67,9 @@ class SearchScreen extends GetView<SearchController> with PreferredSizeWidget{
             ):
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   SizedBox(
                     height: 24,
                     width: 24,
@@ -101,44 +96,44 @@ class SearchScreen extends GetView<SearchController> with PreferredSizeWidget{
             searchController.searchTextController.clear();
             searchController.isSearchActive.toggle();
             Get.back();
-            searchController.selectedButton.value == SearchButton.people;
+            searchController.selectedButton.value == s.SearchButton.people;
             controller.update();
           },
         ),],
         bottom: PreferredSize(
-          preferredSize: preferredSize,
+          preferredSize: const Size.fromHeight(20),
           child: Obx(()=>
             searchController.isSearchActive.value?
             Row(children: [
               Expanded(
                 flex: 4,
                 child: Row(children: [
-                  Components().searchBarTextButton(
+                  SearchBarTextButton(
                     buttonName: 'People',
-                    color: searchController.selectedButton.value == SearchButton.people
+                    color: searchController.selectedButton.value == s.SearchButton.people
                             ? lightColorScheme.primary
                             : lightColorScheme.secondary,
-                    onPressed: (){searchController.setSelectedButton(SearchButton.people);},
+                    onPressed: (){searchController.setSelectedButton(s.SearchButton.people);},
                   ),
-                  Components().searchBarTextButton(
+                  SearchBarTextButton(
                     buttonName: 'Occupations',
-                    color: searchController.selectedButton.value == SearchButton.occupations
+                    color: searchController.selectedButton.value == s.SearchButton.occupations
                             ? lightColorScheme.primary
                             : lightColorScheme.secondary,
-                    onPressed: (){searchController.setSelectedButton(SearchButton.occupations);},
+                    onPressed: (){searchController.setSelectedButton(s.SearchButton.occupations);},
                   ),
-                  Components().searchBarTextButton(
+                  SearchBarTextButton(
                     buttonName: 'Interests',
-                    color: searchController.selectedButton.value == SearchButton.interests
+                    color: searchController.selectedButton.value == s.SearchButton.interests
                             ? lightColorScheme.primary
                             : lightColorScheme.secondary,
-                    onPressed: (){searchController.setSelectedButton(SearchButton.interests);},
+                    onPressed: (){searchController.setSelectedButton(s.SearchButton.interests);},
                   ),
                 ],),
               ),
               Expanded(
                 flex: 1,
-                child: Components().searchBarTextButton(
+                child: SearchBarTextButton(
                   buttonName: 'Search',
                   color: searchController.searchTextController.text != ''
                       ? lightColorScheme.primary
@@ -215,9 +210,9 @@ class SearchScreen extends GetView<SearchController> with PreferredSizeWidget{
             ):
             Center(
               child: Obx(() => searchController.searchWarning.value=="" || searchController.isSearchActive.value==false ?
-                Column(
+                const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(Icons.search_rounded, size: 82,),
                     Text('Search Something', textAlign: TextAlign.center,),
                   ],

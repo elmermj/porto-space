@@ -24,7 +24,7 @@ class PingsScreen extends GetView<PingsController> {
       onChanged: (value){
         if(controller.activePing.value){
           controller.activePing.toggle();
-          print(controller.activePing);
+          debugPrint(controller.activePing.toString());
         }else{
           showCupertinoDialog(
             context: context,
@@ -51,7 +51,7 @@ class PingsScreen extends GetView<PingsController> {
                               TextButton(child: Text("No", style: TextStyle(fontSize: Constants.textM), textAlign: TextAlign.center,), onPressed: (){Get.back();},),
                               TextButton(onPressed: (){
                                 controller.activePing.toggle();
-                                print(controller.activePing);
+                                debugPrint(controller.activePing.toString());
                                 Get.back();
                               }, child: Text("Yes", style: TextStyle(fontSize: Constants.textM), textAlign: TextAlign.center,))
                             ],)
@@ -70,7 +70,7 @@ class PingsScreen extends GetView<PingsController> {
   }
 
   _buildAppBar(BuildContext context){
-    return Container(
+    return SizedBox(
       height: kToolbarHeight,
       width: double.infinity,
       child: Row(

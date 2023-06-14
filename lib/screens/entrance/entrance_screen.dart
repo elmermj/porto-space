@@ -1,5 +1,5 @@
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
-import 'package:porto_space/misc/misc_index.dart';
 import 'package:porto_space/screens/entrance/entrance_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -32,11 +32,11 @@ class EntranceScreen extends GetView<EntranceController> {
 
     void showSignupForm() async {
       if (kDebugMode) {
-        print("show before ${controller.appBar.toString()}");
+        debugPrint("show before ${controller.appBar.toString()}");
       }
       controller.showAppBar();
       if (kDebugMode) {
-        print("show after ${controller.appBar.toString()}");
+        debugPrint("show after ${controller.appBar.toString()}");
       }
       showModalBottomSheet(
         isScrollControlled: true,
@@ -65,32 +65,32 @@ class EntranceScreen extends GetView<EntranceController> {
                       ),
                     ),
                   ),
-                  Components().customTextFormField(
+                  CustomTextFormField(
                     labelText: "Email", 
                     validator: (input) => input!.contains('@')? 'Please enter a valid email address': null,
                     onSaved: (input) => _email = input!,
                     left: 16, top: 4, right: 16, bottom: 2,
                   ),
-                  Components().customTextFormField(
+                  CustomTextFormField(
                     labelText: "First Name", 
                     validator: (input) => input!.isEmpty? 'Please enter your first name': null,
                     onSaved: (input) => _firstName = input!,
                     left: 16, top: 4, right: 16, bottom: 2,
                   ),
-                  Components().customTextFormField(
+                  CustomTextFormField(
                     labelText: "Last Name", 
                     validator: (input) => input!.isEmpty? 'Please enter your last name': null,
                     onSaved: (input) => _lastName = input!,
                     left: 16, top: 4, right: 16, bottom: 2,
                   ),
-                  Components().customTextFormField(
+                  CustomTextFormField(
                     labelText: "Password", 
                     validator: (input) => input!.length < 6? 'Password must be at least 6 characters': null,
                     onSaved: (input) => _password = input!,
                     obscureText: true,
                     left: 16, top: 4, right: 16, bottom: 2,
                   ),
-                  Components().customTextFormField(
+                  CustomTextFormField(
                     labelText: "Confirm Password", 
                     validator: (input) => input! ==_password? 'Passwords are not matched': null,
                     obscureText: true,
@@ -110,22 +110,22 @@ class EntranceScreen extends GetView<EntranceController> {
       ).whenComplete(() 
       {
         if (kDebugMode) {
-          print("show before ${controller.appBar}");
+          debugPrint("show before ${controller.appBar}");
         }
         controller.hideAppBar();
         if (kDebugMode) {
-          print("show after ${controller.appBar}");
+          debugPrint("show after ${controller.appBar}");
         }
       });
     }
 
     void showLoginForm()async{
       if (kDebugMode) {
-        print("show before ${controller.appBar.toString()}");
+        debugPrint("show before ${controller.appBar.toString()}");
       }
       controller.showAppBar();
       if (kDebugMode) {
-        print("show after ${controller.appBar.toString()}");
+        debugPrint("show after ${controller.appBar.toString()}");
       }
       showModalBottomSheet(
         isScrollControlled: true,
@@ -157,13 +157,13 @@ class EntranceScreen extends GetView<EntranceController> {
                       ),
                     ),
                   ),
-                  Components().customTextFormField(
+                  CustomTextFormField(
                     labelText: "Email", 
                     validator: (input) => input!.contains('@')? 'Please enter a valid email address': null,
                     onSaved: (input) => _email = input!,
                     left: 16, top: 4, right: 16, bottom: 2,
                   ),
-                  Components().customTextFormField(
+                  CustomTextFormField(
                     labelText: "Password", 
                     validator: (input) => input!.length < 6? 'Password must be at least 6 characters': null,
                     onSaved: (input) => _password = input!,
@@ -186,11 +186,11 @@ class EntranceScreen extends GetView<EntranceController> {
       ).whenComplete(() 
         {
           if (kDebugMode) {
-            print("show before ${controller.appBar.toString()}");
+            debugPrint("show before ${controller.appBar.toString()}");
           }
           controller.hideAppBar();
           if (kDebugMode) {
-            print("show after ${controller.appBar.toString()}");
+            debugPrint("show after ${controller.appBar.toString()}");
           }
         }
       );
@@ -281,8 +281,8 @@ class EntranceScreen extends GetView<EntranceController> {
                           child: MaterialButton(
                             onPressed: login,
                             height: height*0.1,
-                            child: Row(
-                              children: const [
+                            child: const Row(
+                              children: [
                                 Expanded(
                                   flex: 3,
                                   child: Text("Login with Google", textAlign: TextAlign.center,),
@@ -352,9 +352,9 @@ class EntranceScreen extends GetView<EntranceController> {
                     Expanded(
                       flex: 4,
                       child: Center(
-                        child: controller.appBar==true?const Text(" "): Row(
+                        child: controller.appBar==true?const Text(" "): const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             SizedBox(
                               height: 60,
                               width: 60,
@@ -383,9 +383,9 @@ class EntranceScreen extends GetView<EntranceController> {
                             'assets/animation/tristructure.riv',
                           ),
                         ):
-                        Row(
+                        const Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: const [
+                          children: [
                             Text("Login via Google  ", textAlign: TextAlign.center, style: TextStyle(fontSize: 16),),
                             Image(image: AssetImage("assets/icons/google_g_icon.png"), height: 24, fit: BoxFit.contain,),
                           ],

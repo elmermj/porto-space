@@ -43,7 +43,7 @@ class ConversationController extends GetxController {
     update();
     for(int i=0; i<fromNames.length; i++){
       ConvoCreds convoCred = ConvoCreds(senderId: fromId[i], senderName: fromNames[i]);
-      print("${convoCred.senderId} ${convoCred.senderName} ");
+      debugPrint("${convoCred.senderId} ${convoCred.senderName} ");
       convoCreds.add(convoCred);
     }
     ConvoCreds userCred = ConvoCreds(senderId: user.uid, senderName: 'You');
@@ -142,7 +142,7 @@ class ConversationController extends GetxController {
     final List args = Get.arguments;
     await getOtherUserIdentity(fromNames: args[0], fromId: args[1]);
     update();
-    // print("IT'S A CHAT ROOM. ${args[0]} \n ${otherNames[0].toString()}");
+    // debugPrint("IT'S A CHAT ROOM. ${args[0]} \n ${otherNames[0].toString()}");
     messages.value = [];
     super.onInit();
   }

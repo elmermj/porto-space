@@ -1,15 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:get/get.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
-import 'package:porto_space/models/supports.dart';
-import 'package:porto_space/screens/home/home_controller.dart';
-import 'package:rive/rive.dart' as rive;
 
 class Constants {
-  static Color portoWhite = Color.fromARGB(255, 251, 255, 255);
+  static Color portoWhite = const Color.fromARGB(255, 251, 255, 255);
   static Color trim1Color = const Color.fromARGB(255, 195, 240, 255);
   static Color mainTextColor = const Color.fromARGB(255, 33, 62, 72);
   static double textMicro= 8;
@@ -57,23 +50,23 @@ class Constants {
     switch(projectStatus){
       case 'Initial':
         color = const Color.fromARGB(255, 88, 233, 255);
-        print(projectStatus);
+        debugPrint(projectStatus);
         return color;
       case 'In Progress':
         color = const Color.fromARGB(255, 88, 191, 255);
-        print(projectStatus);
+        debugPrint(projectStatus);
         return color;
       case 'On Pause':
         color = const Color.fromARGB(255, 232, 216, 39);
-        print(projectStatus);
+        debugPrint(projectStatus);
         return color;
       case 'Completed':
         color = const Color.fromARGB(255, 102, 255, 88);
-        print(projectStatus);
+        debugPrint(projectStatus);
         return color;
       case 'Cancelled':
         color = const Color.fromARGB(255, 255, 88, 88);
-        print(projectStatus);
+        debugPrint(projectStatus);
         return color;
     }
   }

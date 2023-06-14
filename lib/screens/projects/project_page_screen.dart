@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/misc_index.dart';
 import 'package:porto_space/models/project_item.dart';
@@ -59,7 +60,7 @@ class ProjectPageScreen extends GetView<ProjectsController>{
                         const Text('QR CODE', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold),),
                         Container(
                           padding: Constants.standardInset,
-                          child: QrImage(
+                          child: QrImageView(
                             data: qrData,
                             dataModuleStyle: const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.circle, color: Colors.black),
                             eyeStyle: const QrEyeStyle(eyeShape: QrEyeShape.circle, color: Colors.black),
@@ -106,7 +107,7 @@ class ProjectPageScreen extends GetView<ProjectsController>{
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 height: kBottomNavigationBarHeight+Constants.textXL,
                 child: Column(
@@ -189,7 +190,7 @@ class ProjectPageScreen extends GetView<ProjectsController>{
                             separatorBuilder: (context, index) => const SizedBox(height: 16,),
                             itemCount: controller.projectMemberList.length,
                             itemBuilder: (context, index){
-                              return Components().profileIcon50(
+                              return ProfileIcon50(
                                 condition: controller.projectMemberList[index].memberId!=controller.user.uid,
                                 name: controller.projectMemberList[index].memberName
                               );
@@ -205,7 +206,7 @@ class ProjectPageScreen extends GetView<ProjectsController>{
 
             GestureDetector(
               onHorizontalDragStart:(p0) => controller.tweenAnimate(), 
-              child: Obx(()=> Components.tweenAnimatedBody(
+              child: Obx(()=> TweenAnimateBody(
                 screenWidth: width, 
                 offsetTweenValue: controller.tweenEndValue.value, 
                 scaleTweenValue: controller.scaleValue.value, 

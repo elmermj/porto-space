@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class PingsController extends GetxController{
@@ -7,11 +8,11 @@ class PingsController extends GetxController{
     if(activePing.value){
       activePing = false.obs;
       update();
-      print(activePing);
+      debugPrint(activePing.toString());
     }else{
       activePing = true.obs;
       update();
-      print(activePing);
+      debugPrint(activePing.toString());
     }
   }
 }

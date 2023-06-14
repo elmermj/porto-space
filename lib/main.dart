@@ -1,5 +1,4 @@
 // ignore_for_file: unused_local_variable, unused_field, constant_identifier_names
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:porto_space/misc/app_pages.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/constants.dart';
@@ -34,7 +33,7 @@ Future<void> main() async {
   );
   // Get.put(HomeController());
   // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-  // print(fcmToken);
+  // debugPrint(fcmToken);
   runApp(PortoSpaceApp());
 }
 

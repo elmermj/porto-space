@@ -40,13 +40,13 @@ class UserQuery {
       currentJob: data['currentJob'],
       currentCity: data['currentCity'],
       currentCompany: data['currentCompany'], 
-      lastEducation: data['lastEducation']??null,
+      lastEducation: data['lastEducation'],
       jobSeekingStatus: data['jobSeekingStatus'],
-      educationHistory: data['eduHistory']??null,
-      careerHistory: data['careerHistory']??null,
-      achievements: data['achievements']??null,
-      myJourney: data['myJourney']??null,
-      ongoingConversations: data['on-conv']??null, 
+      educationHistory: data['eduHistory'],
+      careerHistory: data['careerHistory'],
+      achievements: data['achievements'],
+      myJourney: data['myJourney'],
+      ongoingConversations: data['on-conv'], 
     );
   }
 }

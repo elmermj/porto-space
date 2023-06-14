@@ -18,8 +18,8 @@ class RouteAuthMiddleware extends GetMiddleware {
       return null;
     } else {
       Future.delayed(
-          Duration(seconds: 1), () => Get.snackbar("Processing", "Logging In"));
-      return RouteSettings(name: AppRoutes.ENTRANCE);
+          const Duration(seconds: 1), () => Get.snackbar("Processing", "Logging In"));
+      return const RouteSettings(name: AppRoutes.ENTRANCE);
     }
   }
 }

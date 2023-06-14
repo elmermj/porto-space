@@ -3,17 +3,19 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/components.dart';
 import 'package:porto_space/misc/constants.dart';
 import 'package:porto_space/screens/home/home_controller.dart';
-import 'package:porto_space/screens/projects/project_page_screen.dart';
 
 class ProjectsSubScreen extends GetView<HomeController>{
   final projectKey = GlobalKey<FormState>();
 
   @override
   final HomeController controller = Get.put(HomeController());
+
+  ProjectsSubScreen({super.key});
 
 
   showProjects({
@@ -59,13 +61,13 @@ class ProjectsSubScreen extends GetView<HomeController>{
                     shrinkWrap: true,
                     children: [
                       Components().cEduDialogTitle(title: "Enter Your Project"),
-                      Components().profileIcon50(name: controller.name),
-                      Components().cTextFormField1(
+                      ProfileIcon50(name: controller.name),
+                      CTextFormField1(
                         hintText: "Project name",
                         labelText: "Project Name",
                         onSaved: (input)=> controller.projectName = input!,
                       ),
-                      Components().cTextFormField2(
+                      CTextFormField2(
                         hintText: "Brief description about your project",
                         labelText: "Project Description",
                         onSaved: (input)=> controller.projectDescription = input!,
@@ -90,13 +92,13 @@ class ProjectsSubScreen extends GetView<HomeController>{
                         const SizedBox():
                         Column(
                           children: [
-                            Components().cTextFormField1(
+                            CTextFormField1(
                               hintText: "Project's author's name",
                               labelText: "Project's Author",
                               initialValue: controller.projectAuthor,
                               onSaved: (input)=> controller.projectAuthor = input!,
                             ),
-                            Components().cTextFormField1(
+                            CTextFormField1(
                               hintText: "Your role in this project",
                               labelText: "Your Project Role",
                               initialValue: controller.projectRole,
@@ -105,7 +107,7 @@ class ProjectsSubScreen extends GetView<HomeController>{
                           ],
                         )
                       ),
-                      Components().cTextFormField1(
+                      CTextFormField1(
                         hintText: "Number of project members",
                         labelText: "Member Count",
                         keyboardType: TextInputType.number,
@@ -185,35 +187,35 @@ class ProjectsSubScreen extends GetView<HomeController>{
                           child: Obx(
                             ()=> Row(
                               children: [
-                                Components().searchBarTextButton(
+                                SearchBarTextButton(
                                   buttonName: 'Initial',
                                   color: controller.selectedProjectStage.value == ProjectStages.initial
                                           ? lightColorScheme.primary
                                           : lightColorScheme.secondary,
                                   onPressed: () => controller.setProjectButton(ProjectStages.initial),
                                 ),
-                                Components().searchBarTextButton(
+                                SearchBarTextButton(
                                   buttonName: 'In Progress',
                                   color: controller.selectedProjectStage.value == ProjectStages.inProgress
                                           ? lightColorScheme.primary
                                           : lightColorScheme.secondary,
                                   onPressed: ()=>controller.setProjectButton(ProjectStages.inProgress),
                                 ),
-                                Components().searchBarTextButton(
+                                SearchBarTextButton(
                                   buttonName: 'On Pause',
                                   color: controller.selectedProjectStage.value == ProjectStages.onPause
                                           ? lightColorScheme.primary
                                           : lightColorScheme.secondary,
                                   onPressed: ()=>controller.setProjectButton(ProjectStages.onPause),
                                 ),
-                                Components().searchBarTextButton(
+                                SearchBarTextButton(
                                   buttonName: 'Completed',
                                   color: controller.selectedProjectStage.value == ProjectStages.completed
                                           ? lightColorScheme.primary
                                           : lightColorScheme.secondary,
                                   onPressed: ()=>controller.setProjectButton(ProjectStages.completed),
                                 ),
-                                Components().searchBarTextButton(
+                                SearchBarTextButton(
                                   buttonName: 'Cancelled',
                                   color: controller.selectedProjectStage.value == ProjectStages.cancelled
                                           ? lightColorScheme.primary
@@ -386,7 +388,7 @@ class ProjectsSubScreen extends GetView<HomeController>{
                           children: [
                             Padding(
                               padding: Constants.standardInset,
-                              child: Components().profileIcon50(name: "${controller.name!} as Project Author")
+                              child: ProfileIcon50(name: "${controller.name!} as Project Author")
                             ),
                             Container(
                               width: double.infinity,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
-import 'package:porto_space/misc/components.dart';
 import 'package:porto_space/misc/constants.dart';
 import 'package:porto_space/models/supports.dart';
 import 'package:porto_space/screens/profile/profile_controller.dart';
@@ -62,22 +61,22 @@ class ProfileEditScreen extends GetView<ProfileController> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text('Unemployed: '),
-                  controller.occupation.value=='Unemployed'?
-                  Obx(()=>Checkbox(
-                    value: controller.current.value, 
-                    onChanged: (value){
-                      controller.current.value = value!;
-                      controller.toggleUnemployed(current: controller.current.value);
-                    }
-                  ),)
-                  :
-                  Obx(()=>Checkbox(
-                    value: controller.current.value, 
-                    onChanged: (value){
-                      controller.current.value = value!;
-                      controller.toggleUnemployed(current: controller.current.value);
-                    }
-                  ),)
+                controller.occupation.value=='Unemployed'?
+                Obx(()=>Checkbox(
+                  value: controller.current.value, 
+                  onChanged: (value){
+                    controller.current.value = value!;
+                    controller.toggleUnemployed(current: controller.current.value);
+                  }
+                ),)
+                :  
+                Obx(()=>Checkbox(
+                  value: controller.current.value, 
+                  onChanged: (value){
+                    controller.current.value = value!;
+                    controller.toggleUnemployed(current: controller.current.value);
+                  }
+                ),)
               ],
             ),
             Obx(()=>

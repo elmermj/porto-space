@@ -18,9 +18,9 @@ class WelcomeScreen extends GetView<WelcomeController> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
+    // var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    var maxMobileWidth = 800;
+    // var maxMobileWidth = 800;
 
     return Scaffold(
       appBar: AppBar(

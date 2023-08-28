@@ -18,7 +18,7 @@ class PingsScreen extends GetView<PingsController> {
   final PingsController controller = Get.put(PingsController());
 
 
-  _switch(BuildContext context){
+  pingSwitch(BuildContext context){
      Obx(()=> CupertinoSwitch(
       value: controller.activePing.value, 
       onChanged: (value){

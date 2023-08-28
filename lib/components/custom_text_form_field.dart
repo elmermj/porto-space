@@ -7,14 +7,14 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String? p1)? validator;
   final TextAlign? textAlign;
   final TextStyle? style;
-  Function(String? p1)? onSaved;
-  bool? obscureText = false;
+  final Function(String? p1)? onSaved;
+  final bool? obscureText;
   final double? left;
   final double? top;
   final double? right;
   final double? bottom;
 
-  CustomTextFormField({
+  const CustomTextFormField({
     super.key,
     required this.labelText,
     this.initialValue,
@@ -22,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     this.textAlign,
     this.style,
     this.onSaved,
-    this.obscureText,
+    this.obscureText = false,
     required this.left,
     required this.top,
     required this.right,

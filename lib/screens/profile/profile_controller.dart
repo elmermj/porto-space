@@ -14,7 +14,7 @@ import 'package:porto_space/screens/home/home_index.dart';
 class ProfileController extends GetxController{
   final bool isNew;
   String? dob;
-  RxString name = ' '.obs, city = ' '.obs, occupation = ' '.obs, currentCompany = ' '.obs;
+  RxString name = ' '.obs, city = ' '.obs, occupation = ' '.obs, currentCompany = ' '.obs, profPicUrl = ''.obs;
   User user = FirebaseAuth.instance.currentUser!;
   var isLoading = false.obs;
 
@@ -59,7 +59,7 @@ class ProfileController extends GetxController{
         DateTime.now().day
       ),
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != null && picked != selectedDate!.value) {
       selectedDate!.value = picked;
       update();  
     }else if (dob != null) {  // Add this else block
@@ -139,6 +139,8 @@ class ProfileController extends GetxController{
 
     if(data['occupation']=='Unemployed' || data['occupation']==null) current.value = true;
 
+    if(data['profPicUrl']!=null)  profPicUrl.value = data[profPicUrl];
+
     isNew? textEditName.text = user.displayName! : textEditName.text = name.value;
     textEditName.text == ' '? textEditName.text = user.displayName! : textEditName.text = data['name'];
     textEditCity.text = city.value;
@@ -198,7 +200,6 @@ class ProfileController extends GetxController{
 
   @override
   void onInit() {
-    // TODO: implement onInit
     // loadDataFromLocalStorage(city: textEditCity.text, birthdate: selectedDate!.value);
     loadCities();
     loadProfile();

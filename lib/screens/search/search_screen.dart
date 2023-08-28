@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:porto_space/components/components_index.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
-import 'package:porto_space/misc/components.dart';
 import 'package:porto_space/misc/constants.dart';
 import 'package:porto_space/screens/entrance/entrance_screen.dart';
 import 'package:porto_space/screens/profile/profile_edit_screen.dart';
@@ -12,14 +11,12 @@ import 'package:porto_space/screens/search/search_controller.dart' as s;
 import 'package:rive/rive.dart';
 
 class SearchScreen extends GetView<s.SearchController>{
-  
-  final s.SearchController searchController = Get.put(s.SearchController());
-
   SearchScreen({super.key});
+  final s.SearchController searchController = Get.put(s.SearchController());
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
+    // var height = MediaQuery.of(context).size.height;
     return Scaffold(
       drawer: Drawer(
         width: 150,
@@ -226,7 +223,7 @@ class SearchScreen extends GetView<s.SearchController>{
     );
   }
 
-  List<Map<String,dynamic>?>? dummydata = [
+  final List<Map<String,dynamic>?>? dummydata = [
     {
       'name': 'ass',
       'age':19

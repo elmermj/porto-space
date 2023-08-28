@@ -12,7 +12,7 @@ import 'package:rive/rive.dart'as rive;
 class ConversationRoomScreen extends GetView<ConversationController> {
   ConversationRoomScreen({required this.otherName, required this.roomId, required this.otherId, Key? key}) : super(key: key);
 
-  final otherName, otherId, roomId;
+  final dynamic otherName, otherId, roomId;
 
   @override
   final ConversationController controller = Get.put(ConversationController());
@@ -184,7 +184,7 @@ class ConversationRoomScreen extends GetView<ConversationController> {
                     if (messageData.isBlank == true) {
                       return const Text('Start a new conversation');
                     } else {
-                      return senderId==controller.user.uid
+                      return senderId==controller.user!.uid
                       ? Container(
                         padding: index==docs.length-1?const EdgeInsets.only(top: 82): index==0?const EdgeInsets.only(bottom: 82):null,
                         child: Row(
@@ -315,8 +315,9 @@ class ConversationRoomScreen extends GetView<ConversationController> {
               child: GestureDetector(
                 onTap: () => controller.addMessage(
                   chatId: roomId,
-                  senderId: controller.user.uid,
-                  messageContent: controller.textEditChat.text
+                  senderId: controller.user!.uid,
+                  messageContent: controller.textEditChat.text,
+                  timestamp: DateTime.now().toUtc()
                 ),
                 child: Icon(Icons.send_rounded, size: 30, color: lightColorScheme.primary,),
               )
@@ -386,7 +387,7 @@ class ConversationRoomScreen extends GetView<ConversationController> {
                           itemCount: controller.convoCreds.length,
                           itemBuilder: (context, index){
                             return ProfileIcon50(
-                              condition: controller.convoCreds[index].senderId!=controller.user.uid,
+                              condition: controller.convoCreds[index].senderId!=controller.user!.uid,
                               name: controller.convoCreds[index].senderName
                             );
                           }

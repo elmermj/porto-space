@@ -21,7 +21,6 @@ class ProjectPageScreen extends GetView<ProjectsController>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;

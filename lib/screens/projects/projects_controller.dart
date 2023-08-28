@@ -64,7 +64,6 @@ class ProjectsController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     final List passedData = Get.arguments;
     projectData = passedData[0];

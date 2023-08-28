@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HomeSearchResultScreen extends StatelessWidget {
   const HomeSearchResultScreen({super.key, this.keywords});
 
-  final keywords;
+  final String? keywords;
 
   @override
   Widget build(BuildContext context) {

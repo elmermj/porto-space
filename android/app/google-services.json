@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "394370264308-a6lnckpgd2cmm22ot9jvh0knk7fqb200.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.porto_space",
+            "certificate_hash": "38e9b6312655fcc8089bd46eb0cfdd4a50d488ad"
+          }
+        },
+        {
           "client_id": "394370264308-pvnm6d6tgdlrfgmilcufuc5ukk973ohd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

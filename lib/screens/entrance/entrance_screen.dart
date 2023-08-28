@@ -13,7 +13,7 @@ import 'package:rive/rive.dart' as rive;
 class EntranceScreen extends GetView<EntranceController> {
   final _loginFormKey = GlobalKey<FormState>();  
   final _signupFormKey = GlobalKey<FormState>();
-  late String _email, _password, _firstName, _lastName;
+  late final String _email, _password;
   final String title = "Entrance";
   final String appTitle = "Porto Space";
 
@@ -38,85 +38,6 @@ class EntranceScreen extends GetView<EntranceController> {
       if (kDebugMode) {
         debugPrint("show after ${controller.appBar.toString()}");
       }
-      showModalBottomSheet(
-        isScrollControlled: true,
-        barrierColor: Colors.transparent,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        useSafeArea: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))
-        ),
-        context: context, 
-        builder: (context){
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Form(
-              key: _loginFormKey,
-              child: Wrap(
-                children: [
-                  Center(
-                    child: Text(
-                      "Create new $appTitle account", 
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600, 
-                        fontSize: 16,
-                        // color: Constants().mainTextColor
-                      ),
-                    ),
-                  ),
-                  CustomTextFormField(
-                    labelText: "Email", 
-                    validator: (input) => input!.contains('@')? 'Please enter a valid email address': null,
-                    onSaved: (input) => _email = input!,
-                    left: 16, top: 4, right: 16, bottom: 2,
-                  ),
-                  CustomTextFormField(
-                    labelText: "First Name", 
-                    validator: (input) => input!.isEmpty? 'Please enter your first name': null,
-                    onSaved: (input) => _firstName = input!,
-                    left: 16, top: 4, right: 16, bottom: 2,
-                  ),
-                  CustomTextFormField(
-                    labelText: "Last Name", 
-                    validator: (input) => input!.isEmpty? 'Please enter your last name': null,
-                    onSaved: (input) => _lastName = input!,
-                    left: 16, top: 4, right: 16, bottom: 2,
-                  ),
-                  CustomTextFormField(
-                    labelText: "Password", 
-                    validator: (input) => input!.length < 6? 'Password must be at least 6 characters': null,
-                    onSaved: (input) => _password = input!,
-                    obscureText: true,
-                    left: 16, top: 4, right: 16, bottom: 2,
-                  ),
-                  CustomTextFormField(
-                    labelText: "Confirm Password", 
-                    validator: (input) => input! ==_password? 'Passwords are not matched': null,
-                    obscureText: true,
-                    left: 16, top: 4, right: 16, bottom: 2,
-                  ),
-                  MaterialButton(
-                    padding: const EdgeInsets.fromLTRB(16,4,16,16),
-                    height: 24,
-                    onPressed: signUp,
-                    child: const Center(child: Text('Sign Up')),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-      ).whenComplete(() 
-      {
-        if (kDebugMode) {
-          debugPrint("show before ${controller.appBar}");
-        }
-        controller.hideAppBar();
-        if (kDebugMode) {
-          debugPrint("show after ${controller.appBar}");
-        }
-      });
     }
 
     void showLoginForm()async{

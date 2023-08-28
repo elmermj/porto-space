@@ -159,8 +159,8 @@ class SearchController extends GetxController {
       });
 
       Get.to(() => ConversationRoomScreen(
-        otherName: otherName,
-        otherId: otherId,
+        otherName: otherName!,
+        otherId: otherId!,
         roomId: chatRoomId
       ), arguments: [othersName, othersId, chatRoomId]);
 

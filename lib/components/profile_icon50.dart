@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:porto_space/misc/misc_index.dart';
 
 class ProfileIcon50 extends StatelessWidget {
-  ProfileIcon50({
+  const ProfileIcon50({
     super.key,
     this.condition,
     required this.name,
+    this.picUrl = ""
   });
 
-  var condition;
+  final bool? condition;
   final String? name;
+  final String picUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +22,16 @@ class ProfileIcon50 extends StatelessWidget {
         Container(
           height: 50,
           width: 50,
-          decoration: const ShapeDecoration(
-            shape: StarBorder.polygon(
+          decoration: ShapeDecoration(
+            shape: const StarBorder.polygon(
               sides: 6,
               pointRounding: 0.4,
             ),
-            color: Colors.black
+            color: picUrl==""  ? Colors.black:Colors.transparent
           ),
+          child: picUrl!=""
+              ? Image.network(picUrl)
+              : Container(),
         ),
         condition==null? Text(
           name!,
@@ -36,7 +41,7 @@ class ProfileIcon50 extends StatelessWidget {
           maxLines: 1,
           textAlign: TextAlign.center,
         ):
-        condition? Text(
+        condition!? Text(
           name!,
           style: TextStyle(
             fontSize: Constants.textS

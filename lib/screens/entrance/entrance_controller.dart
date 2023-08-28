@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:porto_space/main.dart';
 import 'package:porto_space/screens/home/screens/home_screen.dart';
 import 'package:porto_space/screens/profile/profile_edit_screen.dart';
 
@@ -29,19 +29,15 @@ class EntranceController extends GetxController {
 
   final firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<void> signInWithGoogle()async {
-    debugPrint(signInWithGoogle().toString());
+  Future<void> signInWithGoogle() async {
     try {
-      debugPrint("TRYING !!");
       isLoading.value = true;
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-      debugPrint("GoogleSignInAuthentication");
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      debugPrint(credential.toString());
 
       final UserCredential userCredential = await _auth.signInWithCredential(credential);
 
@@ -59,6 +55,7 @@ class EntranceController extends GetxController {
           'email': user.email,
           'createdAt': FieldValue.serverTimestamp(),
           'lastLoginAt': FieldValue.serverTimestamp(),
+          'deviceToken': deviceToken
         });
 
         isLoading.value = false;
@@ -70,6 +67,7 @@ class EntranceController extends GetxController {
 
         await users.doc(user.uid).update({
           'lastLoginAt': FieldValue.serverTimestamp(),
+          'deviceToken': deviceToken
         });
 
         isLoading.value = false;
@@ -79,7 +77,7 @@ class EntranceController extends GetxController {
 
       }
     } catch (e) {
-      debugPrint(e.toString());
+      logRed("SIGN IN PROBLEM ::: $e");
     }
   }
 }

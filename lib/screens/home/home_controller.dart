@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:porto_space/main.dart';
 import 'package:porto_space/misc/color_schemes.g.dart';
 import 'package:porto_space/misc/constants.dart';
 import 'package:porto_space/models/convopreview.dart';
@@ -186,7 +187,7 @@ class HomeController extends GetxController{
   submitInterest() async {
     showSnackBar(title: 'Submitting Changes', message: 'Please Wait');
     var userDocRef = firestore.collection('users').doc(user.uid);
-    var interestsColl = firestore.collection('interest');
+    // var interestsColl = firestore.collection('interest');
     var count=0;
 
     if(user.uid.isEmpty) debugPrint("NOT AUTH");
@@ -439,7 +440,7 @@ class HomeController extends GetxController{
         "projectDesc":projectDescription,
         "projectAuthor":projectAuthor,
         "projectStatus":projectStatus,
-        "keywords": projectKeywords.value,
+        "keywords": projectKeywords,
         "memberCount": memberCount,
         "createdBy":name,
         "time":FieldValue.serverTimestamp()
@@ -472,7 +473,6 @@ class HomeController extends GetxController{
   fetchProjectList() async {
 
     projectListItems.clear();
-    final batch = firestore.batch();
     debugPrint("PROJECT LIST ::: $projectList");
     try {
       var projectRefs = projectList
@@ -793,8 +793,11 @@ class HomeController extends GetxController{
       )
     ];
     pageController = PageController(initialPage: page.value);
+    logGreen("DEVICE TOKEN ::: $deviceToken");
     await loadProfile(partial: false);
     fetchProjectList();
+    String userStorage = await storage.read('user');
+    logGreen("USER ::: $userStorage");
     isLoading.value=false;
     debugPrint("INTERESTS :::: $interests");
     update();
